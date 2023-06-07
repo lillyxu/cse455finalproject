@@ -1,4 +1,5 @@
-# CSE455 Final Project: Bird Classification Competition
+# CSE455 Final Project: Bird Classification Competition  
+Lilly Xu and Jared Tran
 
 ### Problem Description 
 We are trying to train our model to classify images of birds by their species.  
