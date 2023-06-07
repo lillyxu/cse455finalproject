@@ -31,11 +31,12 @@ Epoch \[10/10], Val Loss: 2.5601, Val Accuracy: 0.5615
 We encountered quite a few bugs when writing the code for this project. One problem that took us a long time to debug was that we passed the wrong  value for out_features into nn.Linear(). We were initially getting vague error messages, but later found online that setting os.environ\["CUDA_LAUNCH_BLOCKING"] = "1" gave more detailed stack traces. Through this, we were able to step through our code line by line and see where the error was coming from. Another bug we encountered was that we were freezing the model's parameters and then creating an optimizer on those parameters. However, since those parameters were frozen, it didn't make sense to optimize on them. Instead, we should optimize on the fully connected layer we added to our model. Generally, our code took quite a while to run, so sometimes, we would wait upwards of 10-15 minutes, only to see that the outputted accuracy was shockingly low because we tweaked a line of code incorrectly. 
 
 * **Are there next steps you would take if you kept working on the project?**  
-If we kept working on the project, we would definitely want to increase the accuracy of our model. Additionally, if we had a lot of extra time, it might even be fun to try training a model from scratch!
+If we kept working on the project, we would definitely want to increase the accuracy of our model. To do this, we would want to add additional layers and more epochs to our model. We could also look into further reducing the size of the validation dataset, so that we have more data to train the model on. We would also want to decrease the loss of our model and avoid overfitting. We could do this by applying more random image transforms to make the model more generalized. Additionally, if we had a lot of extra time, it might even be fun to try training a model from scratch!
 
 * **How does your approach differ from others? Was that beneficial?**  
-We're not super sure if our apporach differs from others. However, it does seem like ResNeXt101 WSL is less common than ResNet50. In our code, using ResNeXt101 WSL was beneficial, as we were able to achieve a higher accuracy with that over using ResNet50.
+We chose to split the training dataset into two so that we had a small percentage of it reserved for model validation. This helped us evaluate the model at each epoch and store the best-performing model state. Furthermore, we optimized by storing the best-performing model state because we often had the case where previous models performed better than later ones. It also seems like ResNeXt101 WSL is less common than ResNet50. In our code, using ResNeXt101 WSL was beneficial, as we were able to achieve a higher accuracy with that over using ResNet50.
 
-### Video
+### Video  
+https://youtu.be/w9arXYzSbQc
 
 ### Kaggle Notebook
