@@ -39,4 +39,5 @@ We chose to split the training dataset into two so that we had a small percentag
 ### Video  
 https://youtu.be/w9arXYzSbQc
 
-### Kaggle Notebook
+### Kaggle Notebook  
+It's saved as the other file in this repo: resnext101-wsl.ipynb
