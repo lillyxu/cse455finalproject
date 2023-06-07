@@ -7,23 +7,23 @@ We are trying to train our model to classify images of birds by their species.
 We used a pretrained model—[ResNeXt101 WSL](https://pytorch.org/hub/facebookresearch_WSL-Images_resnext/). This model is by Facebook AI, and it has been trained and fine-tuned on 940 million public images.   
 
 ### Our Approach  
-To start off, we load the birds train dataset. We then apply three transforms, resizing, converting to tensors, and normalizing, to the images. Next, we split the dataset 90-10 into training and validation datasets. Then, we load in our pretrained model and freeze the model because we don't want to wipe the pretrained weights. In terms of picking the model, we initially started with ResNet50 because we saw online that it works well for image classification. After getting lower validation accuracies than expected, we looked into other models. We found that ResNeXt101 WSL is supposed to work better than ResNet50. One downside is that it is much slower; however, we think that the tradeoff is worth it. Importantly, we need to modify the last fully connected layer to match the number of bird classes (otherwise we get a major error), and optimize on that layer. Before evaluating, we need to define the loss function, so we can gauge the error between the predicted output and the target value. Finally, we loop through the training and validation phases a set number of times (this is the number of epoches), and we can output the losses and accuracies from each epoch. It's important to note, we are also trying to run all this on CUDA to speed up the computing on the GPU. 
+To start off, we load the birds train dataset. We then apply three transforms, resizing, converting to tensors, and normalizing, to the images. Next, we split the dataset 90-10 into training and validation datasets. Then, we load in our pretrained model and freeze the model because we don't want to wipe the pretrained weights. In terms of picking the model, we initially started with ResNet50 because we saw online that it works well for image classification. After getting lower validation accuracies than expected, we looked into other models. We found that ResNeXt101 WSL is supposed to work better than ResNet50. One downside is that it is much slower; however, we think that the tradeoff is worth it. Importantly, we need to modify the last fully connected layer to match the number of bird classes (otherwise we get a major error), and optimize on that layer using Adam. This optimizer is supposed to perform better than SGD, and again, it is a little slower, but we wanted to prioritize accuracy. Before evaluating, we need to define the loss function, so we can gauge the error between the predicted output and the target value. Finally, we loop through the training and validation phases a set number of times (this is the number of epoches), and we can output the losses and accuracies from each epoch. At the end of each epoch, we store the model if it performed better than the previous best epoch's because we noticed that sometimes later epochs performed worse than earlier ones. We are then able to choose the best-performing model to predict against the test dataset. It's important to note, we are also trying to run all this on CUDA to speed up the computing on the GPU. 
 
 ### Datasets  
 We used the birds dataset under the Kaggle competition. This dataset contains images of 555 different bird species. 
 
 ### Results
 Here are our results:    
-Epoch \[1/10], Val Loss: 2.5016, Val Accuracy: 0.4240  
-Epoch \[2/10], Val Loss: 2.2090, Val Accuracy: 0.4815  
-Epoch \[3/10], Val Loss: 2.1401, Val Accuracy: 0.5106  
-Epoch \[4/10], Val Loss: 2.1616, Val Accuracy: 0.5287  
-Epoch \[5/10], Val Loss: 2.2880, Val Accuracy: 0.5312  
-Epoch \[6/10], Val Loss: 2.3541, Val Accuracy: 0.5297  
-Epoch \[7/10], Val Loss: 2.3648, Val Accuracy: 0.5433  
-Epoch \[8/10], Val Loss: 2.5361, Val Accuracy: 0.5333  
-Epoch \[9/10], Val Loss: 2.4037, Val Accuracy: 0.5523  
-Epoch \[10/10], Val Loss: 2.5200, Val Accuracy: 0.5403  
+Epoch \[1/10], Val Loss: 2.4402, Val Accuracy: 0.4367
+Epoch \[2/10], Val Loss: 2.3585, Val Accuracy: 0.4754
+Epoch \[3/10], Val Loss: 2.2171, Val Accuracy: 0.5161
+Epoch \[4/10], Val Loss: 2.3098, Val Accuracy: 0.5288
+Epoch \[5/10], Val Loss: 2.2605, Val Accuracy: 0.5379
+Epoch \[6/10], Val Loss: 2.2387, Val Accuracy: 0.5573
+Epoch \[7/10], Val Loss: 2.3215, Val Accuracy: 0.5545
+Epoch \[8/10], Val Loss: 2.3422, Val Accuracy: 0.5617
+Epoch \[9/10], Val Loss: 2.4347, Val Accuracy: 0.5576
+Epoch \[10/10], Val Loss: 2.5601, Val Accuracy: 0.5615  
 
 ### Discussion
 
